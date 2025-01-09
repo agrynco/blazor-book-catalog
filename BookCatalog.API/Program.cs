@@ -3,6 +3,7 @@ using BookCatalog.API.Extensions;
 using BookCatalog.API.Repositories;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddCustomSwagger();
 
 builder.Services.AddSingleton<IBookRepository, BookRepository>();
