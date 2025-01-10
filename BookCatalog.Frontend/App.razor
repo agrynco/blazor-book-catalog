@@ -4,16 +4,9 @@
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
     </Found>
     <NotFound>
-        <h1>404 - Not Found</h1>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
     </NotFound>
 </Router>
-
-@code {
-    [Inject]
-    private NavigationManager NavigationManager { get; set; } = null!;
-
-    protected override void OnInitialized()
-    {
-        NavigationManager.NavigateTo("/books");
-    }
-}
