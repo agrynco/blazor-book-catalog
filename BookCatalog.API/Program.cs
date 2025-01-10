@@ -1,3 +1,4 @@
+using System.Threading.RateLimiting;
 using BookCatalog.API;
 using BookCatalog.API.Extensions;
 using BookCatalog.API.Repositories;
@@ -18,7 +19,25 @@ builder.Services.AddCors(options =>
 	});
 });
 
+builder.Services.AddRateLimiter(options =>
+{
+	options.AddPolicy("General", context =>
+		RateLimitPartition.GetFixedWindowLimiter(
+			partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "global",
+			factory: _ => new FixedWindowRateLimiterOptions
+			{
+				PermitLimit = 10,
+				Window = TimeSpan.FromMinutes(1), // Per 1 minute
+				QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+				QueueLimit = 2
+			}));
+});
+
 WebApplication app = builder.Build();
+
+app.UseRateLimiter();
+
+app.MapGet("/test", () => Results.Ok("Request succeeded!")).RequireRateLimiting("General");
 
 app.UseCors();
 

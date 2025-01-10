@@ -17,12 +17,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="Remove sample Razor pages and add Docker support for deployment&#10;&#10;This commit deletes unused Razor pages (Counter, Home, and Weather) to streamline the frontend structure. Additionally, it introduces `docker-compose` and Dockerfiles for the API and frontend projects, enabling containerized deployment. Environment variable support for API base address is configured, with nginx set up for serving the frontend.">
+    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BookCatalog.API/test-rate-limit.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.API/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Layout/NavMenu.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.API/BookCatalog.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/BookCatalog.API.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +31,13 @@
   <component name="ChangesViewManager" show_ignored="true" />
   <component name="DpaMonitoringSettings">
     <option name="firstShow" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,8 +49,11 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63059da4dc70403db49a4a2073b8bc023a0a0/a0/6681034b/NavigationManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6c8ca52d70f6435ebb144378daa6c59717878/f6/d83a188d/IWebAssemblyHostEnvironment.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6c8ca52d70f6435ebb144378daa6c59717878/f6/d83a188d/IWebAssemblyHostEnvironment.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c5a0a59f4fe94472b758b1fb5fa6028d13930/bf/036bc65d/IHost.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2d861df98593f86185428986f10ec394e76649fdf4e9e17934f13c4504dd645/RateLimiterServiceCollectionExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4dd5338dd6979df9518546eba3f77d8f859a1c5e160652f851ff244beae562/RateLimitPartition.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4e525246c8d29f6e83cbf39d87e36d08fffa09733e43382b9629ca6aa31541/RateLimiterOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f16564c8c4b61e6ea398fe412680c6b795b266584ccf6a362aed712dc4d2b387/WebApplication.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BookCatalog.Frontend/wwwroot/css/bootstrap/bootstrap.min.css.map" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -58,25 +67,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.BookCatalog.API: http.executor": "Debug",
-    ".NET Launch Settings Profile.BookCatalog.Frontend: http.executor": "Debug",
-    "Compound.API + Frontend.executor": "Debug",
-    "Docker.BookCatalog.API/Dockerfile.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "ssh.settings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.BookCatalog.API: http.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET Launch Settings Profile.BookCatalog.Frontend: http.executor&quot;: &quot;Debug&quot;,
+    &quot;Attach to Process.15064:BookCatalog.API.executor&quot;: &quot;Debug&quot;,
+    &quot;Compound.API + Frontend.executor&quot;: &quot;Debug&quot;,
+    &quot;Docker.BookCatalog.API/Dockerfile.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ssh.settings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -84,7 +95,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Compound.API + Frontend">
+  <component name="RunManager" selected=".NET Launch Settings Profile.BookCatalog.API: http">
     <configuration name="API + Frontend" type="CompoundRunConfigurationType">
       <toRun name="BookCatalog.API: http" type="LaunchSettings" />
       <toRun name="BookCatalog.Frontend: http" type="LaunchSettings" />
@@ -204,7 +215,10 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile" />
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
     <list>
@@ -230,7 +244,9 @@
       <workItem from="1736446402374" duration="9000" />
       <workItem from="1736446422175" duration="785000" />
       <workItem from="1736447225251" duration="159000" />
-      <workItem from="1736447433585" duration="17557000" />
+      <workItem from="1736447433585" duration="25131000" />
+      <workItem from="1736506839518" duration="96000" />
+      <workItem from="1736506947484" duration="610000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial solution structure for BookCatalog project&#10;&#10;This commit sets up the foundational structure of the BookCatalog project. It includes the API and Frontend projects, solution file, configuration files, sample data, and static assets. These changes provide the groundwork for further development.">
       <option name="closed" value="true" />
@@ -304,7 +320,47 @@
       <option name="project" value="LOCAL" />
       <updated>1736496739413</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Streamline frontend and enable Docker-based deployment&#10;&#10;Removed unused Razor pages (Counter, Home, and Weather) to declutter the frontend. Added Docker support via `docker-compose` for API and frontend projects, enabling containerized deployment. Configured environment variables for API base address and updated navigation to improve user routing and experience.">
+      <option name="closed" value="true" />
+      <created>1736498513448</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1736498513448</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Remove docker-compose.override.yml file&#10;&#10;The file was deleted as it is no longer needed. Environment configuration for the Blazor service should be handled elsewhere. This simplifies the setup and avoids redundant overrides.">
+      <option name="closed" value="true" />
+      <created>1736498996875</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1736498996875</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Improve book filter UI and add responsive styling.&#10;&#10;Refactored the filter UI in Books.razor to enhance structure, styling, and responsiveness by using CSS classes and flexbox layout. Introduced a new Books.razor.css file to manage related styles, including handling responsive behavior for filter inputs. Minor formatting updates in index.html to ensure consistent coding standards.">
+      <option name="closed" value="true" />
+      <created>1736501607232</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1736501607232</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Add sorting functionality to books listing&#10;&#10;Introduced sorting by title, author, and genre in both ascending and descending orders in the API and frontend. Updated the UI with sortable column headers and corresponding arrow indicators to reflect the sorting state. Adjusted the data fetching logic to include sorting parameters.">
+      <option name="closed" value="true" />
+      <created>1736502659534</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1736502659534</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Add bulk upload functionality for books via CSV&#10;&#10;Introduced a new API endpoint and frontend capability to upload books in bulk using a CSV file. Included CSV parsing logic via `CsvHelper`, server-side handling in `BooksEndpoints`, and an updated UI for file upload in the books page.">
+      <option name="closed" value="true" />
+      <created>1736505987505</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1736505987505</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,6 +378,30 @@
     <MESSAGE value="Add seed data to BookRepository for initial book collection&#10;&#10;This commit updates the `BookRepository` with a predefined list of seed data containing popular programming and software development books. This change enables the application to have an initial set of data for development and testing purposes without requiring external data setup." />
     <MESSAGE value="Add book management features and enable CORS in API&#10;&#10;This commit introduces full CRUD functionality for managing books, including pages for listing, adding, editing, and deleting books in the frontend. It also enables CORS in the API to support client-server communication and adjusts the frontend to target .NET 7. Additionally, navigation and models were updated to support proper data handling and UI improvements." />
     <MESSAGE value="Remove sample Razor pages and add Docker support for deployment&#10;&#10;This commit deletes unused Razor pages (Counter, Home, and Weather) to streamline the frontend structure. Additionally, it introduces `docker-compose` and Dockerfiles for the API and frontend projects, enabling containerized deployment. Environment variable support for API base address is configured, with nginx set up for serving the frontend." />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove sample Razor pages and add Docker support for deployment&#10;&#10;This commit deletes unused Razor pages (Counter, Home, and Weather) to streamline the frontend structure. Additionally, it introduces `docker-compose` and Dockerfiles for the API and frontend projects, enabling containerized deployment. Environment variable support for API base address is configured, with nginx set up for serving the frontend." />
+    <MESSAGE value="Streamline frontend and enable Docker-based deployment&#10;&#10;Removed unused Razor pages (Counter, Home, and Weather) to declutter the frontend. Added Docker support via `docker-compose` for API and frontend projects, enabling containerized deployment. Configured environment variables for API base address and updated navigation to improve user routing and experience." />
+    <MESSAGE value="Remove docker-compose.override.yml file&#10;&#10;The file was deleted as it is no longer needed. Environment configuration for the Blazor service should be handled elsewhere. This simplifies the setup and avoids redundant overrides." />
+    <MESSAGE value="Improve book filter UI and add responsive styling.&#10;&#10;Refactored the filter UI in Books.razor to enhance structure, styling, and responsiveness by using CSS classes and flexbox layout. Introduced a new Books.razor.css file to manage related styles, including handling responsive behavior for filter inputs. Minor formatting updates in index.html to ensure consistent coding standards." />
+    <MESSAGE value="Add sorting functionality to books listing&#10;&#10;Introduced sorting by title, author, and genre in both ascending and descending orders in the API and frontend. Updated the UI with sortable column headers and corresponding arrow indicators to reflect the sorting state. Adjusted the data fetching logic to include sorting parameters." />
+    <MESSAGE value="Add bulk upload functionality for books via CSV&#10;&#10;Introduced a new API endpoint and frontend capability to upload books in bulk using a CSV file. Included CSV parsing logic via `CsvHelper`, server-side handling in `BooksEndpoints`, and an updated UI for file upload in the books page." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add bulk upload functionality for books via CSV&#10;&#10;Introduced a new API endpoint and frontend capability to upload books in bulk using a CSV file. Included CSV parsing logic via `CsvHelper`, server-side handling in `BooksEndpoints`, and an updated UI for file upload in the books page." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BookCatalog.API/BooksEndpoints.cs</url>
+          <line>80</line>
+          <properties documentPath="C:\projects\blazor-book-catalog\BookCatalog.API\BooksEndpoints.cs" containingFunctionPresentation="Lambda expression inside Method 'MapBookEndpoints'">
+            <startOffsets>
+              <option value="2233" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2265" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
