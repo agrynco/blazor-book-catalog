@@ -3,6 +3,7 @@
 using System.Net.Http.Json;
 using BookCatalog.Frontend.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 
 public partial class Books
@@ -13,7 +14,7 @@ public partial class Books
 
 	private int _currentPage = 1;
 	private string? _genre;
-	private int _pageSize = 5;
+	private readonly int _pageSize = 5;
 
 	private string? _sortBy = "title";
 	private string? _sortOrder = "asc";
@@ -21,6 +22,7 @@ public partial class Books
 	private string? _title;
 	private int _totalCount;
 	private int _totalPages;
+	private IBrowserFile? _file;
 	private bool HasNext => _currentPage < _totalPages;
 
 	private bool HasPrev => _currentPage > 1;
@@ -130,5 +132,53 @@ public partial class Books
 
 		await Http.DeleteAsync($"api/books/{id}");
 		await LoadBooks();
+	}
+	
+
+	private async Task UploadCsv()
+	{
+		if (_file is null)
+		{
+			// No file selected, return early
+			return;
+		}
+
+		try
+		{
+			using var content = new MultipartFormDataContent();
+			var fileContent = new StreamContent(_file.OpenReadStream());
+			fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("text/csv");
+			content.Add(fileContent, "file", _file.Name);
+
+			var response = await Http.PostAsync("api/books/bulk-upload", content);
+
+			if (response.IsSuccessStatusCode)
+			{
+				// Reload books to reflect newly added data
+				await LoadBooks();
+				_file = null; // Reset the file input
+				StateHasChanged();
+			}
+			else
+			{
+				var errorMessage = await response.Content.ReadAsStringAsync();
+				Console.WriteLine($"Upload failed: {errorMessage}");
+			}
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error uploading file: {ex.Message}");
+		}
+	}
+
+	private void HandleFileSelected(InputFileChangeEventArgs e)
+	{
+		if (e.FileCount <= 0)
+		{
+			return;
+		}
+
+		_file = e.File;
+		Console.WriteLine($"Selected file: {_file.Name}");
 	}
 }

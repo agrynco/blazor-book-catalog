@@ -21,13 +21,25 @@
 </div>
 
 
+<div class="d-flex mb-3">
+    <button class="btn btn-success me-3" @onclick="AddBook">Add Book</button>
+    <div>
+        <InputFile OnChange="HandleFileSelected" />
 
-<button class="btn btn-success mb-3" @onclick="AddBook">Add Book</button>
+        <button class="btn btn-primary ms-2" @onclick="UploadCsv" disabled="@(_file is null)">Upload CSV</button>
+    </div>
+</div>
+
 
 @if (_books is null)
 {
-    <p>Loading...</p>
+    <div class="d-flex justify-content-center my-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
 }
+
 else if (_books.Count == 0)
 {
     <p>No books found.</p>
@@ -63,9 +75,14 @@ else
                     <td>@book.Author</td>
                     <td>@book.Genre</td>
                     <td>
-                        <button class="btn btn-primary btn-sm me-2" @onclick="() => EditBook(book.Id)">Edit</button>
+                        <button class="btn btn-primary btn-sm me-2" @onclick="() => EditBook(book.Id)" aria-label="Edit Book">
+                            Edit
+                        </button>
 
-                        <button class="btn btn-danger btn-sm" @onclick="() => DeleteBook(book.Id)">Delete</button>
+                        <button class="btn btn-danger btn-sm" @onclick="() => DeleteBook(book.Id)" aria-label="Delete Book">
+                            Delete
+                        </button>
+
                     </td>
                 </tr>
             }
@@ -74,9 +91,10 @@ else
 }
 
 <!-- Pagination Controls -->
-<div>
-    <button @onclick="PrevPage" disabled="@(!HasPrev)">Previous</button>
-    <span class="mx-2">Page @_currentPage of @_totalPages</span>
-    <button @onclick="NextPage" disabled="@(!HasNext)">Next</button>
+<div class="pagination-controls d-flex justify-content-center my-3">
+    <button class="btn btn-outline-primary me-2" @onclick="PrevPage" disabled="@(!HasPrev)">Previous</button>
+    <span class="align-self-center">Page @_currentPage of @_totalPages</span>
+    <button class="btn btn-outline-primary ms-2" @onclick="NextPage" disabled="@(!HasNext)">Next</button>
 </div>
+
 

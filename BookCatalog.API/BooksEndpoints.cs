@@ -75,5 +75,35 @@ public static class BooksEndpoints
 			bool deleted = repo.Delete(id);
 			return deleted ? Results.NoContent() : Results.NotFound();
 		});
+
+		booksGroup.MapPost("/bulk-upload", async (IBookRepository repo, HttpRequest request) =>
+		{
+			if (!request.HasFormContentType)
+			{
+				return Results.BadRequest("Invalid content type. Please upload a valid CSV file.");
+			}
+
+			var form = await request.ReadFormAsync();
+			var file = form.Files.FirstOrDefault();
+
+			if (file is null || file.Length == 0)
+			{
+				return Results.BadRequest("No file uploaded or the file is empty.");
+			}
+
+			using var reader = new StreamReader(file.OpenReadStream());
+			var csvContent = await reader.ReadToEndAsync();
+
+			// Process CSV
+			var books = CsvHelper.ParseBooksFromCsv(csvContent);
+
+			foreach (Book book in books)
+			{
+				repo.Add(book);
+			}
+
+			return Results.Ok(new { Message = $"{books.Count} books imported successfully." });
+		});
+
 	}
 }
