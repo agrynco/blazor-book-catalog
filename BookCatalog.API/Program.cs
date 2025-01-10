@@ -13,6 +13,7 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.WithClientIp()
     .Enrich.WithProperty("Application", "BookCatalog.API") // Add a property to all logs
     .WriteTo.Seq("http://localhost:5341")
+    .WriteTo.Console()
     .CreateLogger();
 
 builder.Host.UseSerilog();

@@ -17,17 +17,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="Set .NET SDK version to 8.0.303 in global.json&#10;&#10;Added a new global.json file to specify the .NET SDK version. This ensures consistent development and builds across environments.">
-      <change afterPath="$PROJECT_DIR$/BookCatalog.API/BooksHub.cs" afterDir="false" />
+    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="Integrate SignalR for real-time book updates&#10;&#10;Added SignalR support for real-time updates in both backend and frontend. Backend changes include a new `BooksHub` for notifications and updates to `BooksEndpoints`. Frontend now listens to real-time events like `BookAdded`, `BookUpdated`, and `BookDeleted` for dynamic UI refreshes. Additionally, logging and Serilog were configured for enhanced monitoring.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.API/BookCatalog.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/BookCatalog.API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.API/BooksEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/BooksEndpoints.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookCatalog.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.API/Repositories/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Repositories/BookRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.API/Repositories/IBookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Repositories/IBookRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/BookCatalog.Frontend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/BookCatalog.Frontend.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Books/Books.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Books/Books.razor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.API/SwaggerExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/SwaggerExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,7 +253,7 @@
       <workItem from="1736447225251" duration="159000" />
       <workItem from="1736447433585" duration="25131000" />
       <workItem from="1736506839518" duration="96000" />
-      <workItem from="1736506947484" duration="8907000" />
+      <workItem from="1736506947484" duration="12163000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial solution structure for BookCatalog project&#10;&#10;This commit sets up the foundational structure of the BookCatalog project. It includes the API and Frontend projects, solution file, configuration files, sample data, and static assets. These changes provide the groundwork for further development.">
       <option name="closed" value="true" />
@@ -389,7 +383,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736507918418</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Integrate SignalR for real-time book updates&#10;&#10;Added SignalR support for real-time updates in both backend and frontend. Backend changes include a new `BooksHub` for notifications and updates to `BooksEndpoints`. Frontend now listens to real-time events like `BookAdded`, `BookUpdated`, and `BookDeleted` for dynamic UI refreshes. Additionally, logging and Serilog were configured for enhanced monitoring.">
+      <option name="closed" value="true" />
+      <created>1736515943147</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1736515943147</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,6 +416,7 @@
     <MESSAGE value="Add bulk upload functionality for books via CSV&#10;&#10;Introduced a new API endpoint and frontend capability to upload books in bulk using a CSV file. Included CSV parsing logic via `CsvHelper`, server-side handling in `BooksEndpoints`, and an updated UI for file upload in the books page." />
     <MESSAGE value="Add rate limiting to the API&#10;&#10;Introduced a fixed window rate limiter with a &quot;General&quot; policy allowing 10 requests per minute per client and queued overflow of up to 2 requests. Configured rate limiting middleware and a test endpoint to verify functionality. Added the `System.Threading.RateLimiting` package and a batch script for stress testing." />
     <MESSAGE value="Set .NET SDK version to 8.0.303 in global.json&#10;&#10;Added a new global.json file to specify the .NET SDK version. This ensures consistent development and builds across environments." />
-    <option name="LAST_COMMIT_MESSAGE" value="Set .NET SDK version to 8.0.303 in global.json&#10;&#10;Added a new global.json file to specify the .NET SDK version. This ensures consistent development and builds across environments." />
+    <MESSAGE value="Integrate SignalR for real-time book updates&#10;&#10;Added SignalR support for real-time updates in both backend and frontend. Backend changes include a new `BooksHub` for notifications and updates to `BooksEndpoints`. Frontend now listens to real-time events like `BookAdded`, `BookUpdated`, and `BookDeleted` for dynamic UI refreshes. Additionally, logging and Serilog were configured for enhanced monitoring." />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrate SignalR for real-time book updates&#10;&#10;Added SignalR support for real-time updates in both backend and frontend. Backend changes include a new `BooksHub` for notifications and updates to `BooksEndpoints`. Frontend now listens to real-time events like `BookAdded`, `BookUpdated`, and `BookDeleted` for dynamic UI refreshes. Additionally, logging and Serilog were configured for enhanced monitoring." />
   </component>
 </project>
