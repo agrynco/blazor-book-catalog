@@ -15,12 +15,28 @@ public static class BooksEndpoints
 			string? title,
 			string? author,
 			string? genre,
+			string? sortBy = "title",
+			string? sortOrder = "asc",
 			int page = 1,
 			int pageSize = 10) =>
 		{
 			var filtered = repo.Search(title, author, genre).ToList();
-			int totalCount = filtered.Count;
 
+			filtered = sortBy?.ToLower() switch
+			{
+				"title" => sortOrder?.ToLower() == "desc"
+					? filtered.OrderByDescending(b => b.Title).ToList()
+					: filtered.OrderBy(b => b.Title).ToList(),
+				"author" => sortOrder?.ToLower() == "desc"
+					? filtered.OrderByDescending(b => b.Author).ToList()
+					: filtered.OrderBy(b => b.Author).ToList(),
+				"genre" => sortOrder?.ToLower() == "desc"
+					? filtered.OrderByDescending(b => b.Genre).ToList()
+					: filtered.OrderBy(b => b.Genre).ToList(),
+				_ => filtered.OrderBy(b => b.Title).ToList()
+			};
+
+			int totalCount = filtered.Count;
 			var items = filtered
 				.Skip((page - 1) * pageSize)
 				.Take(pageSize)
@@ -34,6 +50,7 @@ public static class BooksEndpoints
 				Items = items
 			});
 		});
+
 
 		booksGroup.MapGet("/{id:int}", (IBookRepository repo, int id) =>
 		{

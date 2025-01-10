@@ -15,6 +15,9 @@ public partial class Books
 	private string? _genre;
 	private int _pageSize = 5;
 
+	private string? _sortBy = "title";
+	private string? _sortOrder = "asc";
+
 	private string? _title;
 	private int _totalCount;
 	private int _totalPages;
@@ -38,20 +41,16 @@ public partial class Books
 
 	private async Task LoadBooks()
 	{
-		string? query = $"?title={_title}&author={_author}&genre={_genre}&page={_currentPage}&pageSize={_pageSize}";
+		var query = $"?title={_title}&author={_author}&genre={_genre}" +
+		            $"&sortBy={_sortBy}&sortOrder={_sortOrder}" +
+		            $"&page={_currentPage}&pageSize={_pageSize}";
+
 		var result = await Http.GetFromJsonAsync<PagedResult<Book>>($"api/books{query}");
 
 		if (result is not null)
 		{
 			_books = result.Items;
-			_totalCount = result.TotalCount;
-			_pageSize = result.PageSize;
-			_currentPage = result.Page;
-			_totalPages = (int)Math.Ceiling(_totalCount / (double)_pageSize);
-		}
-		else
-		{
-			_books = new List<Book>();
+			_totalPages = (int)Math.Ceiling(result.TotalCount / (double)_pageSize);
 		}
 	}
 
@@ -87,6 +86,34 @@ public partial class Books
 	private void EditBook(int id)
 	{
 		NavigationManager.NavigateTo($"/books/edit-or-add/{id}");
+	}
+
+	private async Task ApplySorting(string sortBy)
+	{
+		if (_sortBy == sortBy)
+		{
+			// Toggle sort order if the same column is clicked
+			_sortOrder = _sortOrder == "asc" ? "desc" : "asc";
+		}
+		else
+		{
+			// Set new sort column and reset to ascending
+			_sortBy = sortBy;
+			_sortOrder = "asc";
+		}
+
+		// Reload books with new sorting
+		await LoadBooks();
+	}
+
+	private string SortIndicator(string column)
+	{
+		if (_sortBy != column)
+		{
+			return string.Empty;
+		}
+
+		return _sortOrder == "asc" ? "⬆️" : "⬇️"; // Arrow indicators
 	}
 
 	private async Task DeleteBook(int id)

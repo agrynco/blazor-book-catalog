@@ -37,9 +37,21 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Genre</th>
+                <th>
+                    <button class='btn btn-link' @onclick='() => ApplySorting("title")'>
+                        Title @SortIndicator("title")
+                    </button>
+                </th>
+                <th>
+                    <button class='btn btn-link' @onclick='() => ApplySorting("author")'>
+                        Author @SortIndicator("author")
+                    </button>
+                </th>
+                <th>
+                    <button class='btn btn-link' @onclick='() => ApplySorting("genre")'>
+                        Genre @SortIndicator("genre")
+                    </button>
+                </th>
                 <th style="width:150px">Actions</th>
             </tr>
         </thead>
