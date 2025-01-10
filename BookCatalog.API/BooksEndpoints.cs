@@ -2,10 +2,11 @@
 
 using BookCatalog.API.Entities;
 using BookCatalog.API.Repositories;
+using Microsoft.AspNetCore.SignalR;
 
 public static class BooksEndpoints
 {
-	public static void MapBookEndpoints(this IEndpointRouteBuilder routes)
+	public static void MapBookEndpoints(this IEndpointRouteBuilder routes, IHubContext<BooksHub> hubContext)
 	{
 		var booksGroup = routes.MapGroup("/api/books")
 			.WithTags("Books");
@@ -20,27 +21,7 @@ public static class BooksEndpoints
 			int page = 1,
 			int pageSize = 10) =>
 		{
-			var filtered = repo.Search(title, author, genre).ToList();
-
-			filtered = sortBy?.ToLower() switch
-			{
-				"title" => sortOrder?.ToLower() == "desc"
-					? filtered.OrderByDescending(b => b.Title).ToList()
-					: filtered.OrderBy(b => b.Title).ToList(),
-				"author" => sortOrder?.ToLower() == "desc"
-					? filtered.OrderByDescending(b => b.Author).ToList()
-					: filtered.OrderBy(b => b.Author).ToList(),
-				"genre" => sortOrder?.ToLower() == "desc"
-					? filtered.OrderByDescending(b => b.Genre).ToList()
-					: filtered.OrderBy(b => b.Genre).ToList(),
-				_ => filtered.OrderBy(b => b.Title).ToList()
-			};
-
-			int totalCount = filtered.Count;
-			var items = filtered
-				.Skip((page - 1) * pageSize)
-				.Take(pageSize)
-				.ToList();
+			(var items, int totalCount) = repo.Search(title, author, genre, sortBy, sortOrder, page, pageSize);
 
 			return Results.Ok(new
 			{
@@ -51,29 +32,39 @@ public static class BooksEndpoints
 			});
 		});
 
-
 		booksGroup.MapGet("/{id:int}", (IBookRepository repo, int id) =>
 		{
 			Book? book = repo.GetById(id);
 			return book is not null ? Results.Ok(book) : Results.NotFound();
 		});
 
-		booksGroup.MapPost("/", (IBookRepository repo, Book newBook) =>
+		booksGroup.MapPost("/", async (IBookRepository repo, Book newBook) =>
 		{
 			Book createdBook = repo.Add(newBook);
+			await hubContext.Clients.All.SendAsync("BookAdded", createdBook);
 			return Results.Created($"/{createdBook.Id}", createdBook);
 		});
 
-		booksGroup.MapPut("/{id:int}", (IBookRepository repo, int id, Book updatedBook) =>
+		booksGroup.MapPut("/{id:int}", async (IBookRepository repo, int id, Book updatedBook) =>
 		{
 			Book? existing = repo.Update(id, updatedBook);
-			return existing is not null ? Results.Ok(existing) : Results.NotFound();
+			if (existing is not null)
+			{
+				await hubContext.Clients.All.SendAsync("BookUpdated", existing); // Notify clients
+				return Results.Ok(existing);
+			}
+			return Results.NotFound();
 		});
 
-		booksGroup.MapDelete("/{id:int}", (IBookRepository repo, int id) =>
+		booksGroup.MapDelete("/{id:int}", async (IBookRepository repo, int id) =>
 		{
 			bool deleted = repo.Delete(id);
-			return deleted ? Results.NoContent() : Results.NotFound();
+			if (deleted)
+			{
+				await hubContext.Clients.All.SendAsync("BookDeleted", id); // Notify clients
+				return Results.NoContent();
+			}
+			return Results.NotFound();
 		});
 
 		booksGroup.MapPost("/bulk-upload", async (IBookRepository repo, HttpRequest request) =>
@@ -102,8 +93,10 @@ public static class BooksEndpoints
 				repo.Add(book);
 			}
 
-			return Results.Ok(new { Message = $"{books.Count} books imported successfully." });
+			return Results.Ok(new
+			{
+				Message = $"{books.Count} books imported successfully."
+			});
 		});
-
 	}
 }

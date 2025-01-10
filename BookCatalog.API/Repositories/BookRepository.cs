@@ -173,7 +173,14 @@ public class BookRepository : IBookRepository
 		return 0;
 	}
 
-	public IEnumerable<Book> Search(string? title, string? author, string? genre)
+	public (IEnumerable<Book> Items, int TotalCount) Search(
+		string? title,
+		string? author,
+		string? genre,
+		string? sortBy = "title",
+		string? sortOrder = "asc",
+		int page = 1,
+		int pageSize = 10)
 	{
 		var query = _books.AsQueryable();
 
@@ -195,6 +202,28 @@ public class BookRepository : IBookRepository
 				b.Genre.Contains(genre, StringComparison.OrdinalIgnoreCase));
 		}
 
-		return query.ToList();
+		int totalCount = query.Count();
+
+		query = sortBy?.ToLower() switch
+		{
+			"title" => sortOrder?.ToLower() == "desc"
+				? query.OrderByDescending(b => b.Title)
+				: query.OrderBy(b => b.Title),
+			"author" => sortOrder?.ToLower() == "desc"
+				? query.OrderByDescending(b => b.Author)
+				: query.OrderBy(b => b.Author),
+			"genre" => sortOrder?.ToLower() == "desc"
+				? query.OrderByDescending(b => b.Genre)
+				: query.OrderBy(b => b.Genre),
+			_ => query.OrderBy(b => b.Title)
+		};
+
+		var paginatedItems = query
+			.Skip((page - 1) * pageSize)
+			.Take(pageSize)
+			.ToList();
+
+		return (paginatedItems, totalCount);
 	}
+
 }

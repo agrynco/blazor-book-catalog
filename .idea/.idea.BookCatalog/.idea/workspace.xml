@@ -17,11 +17,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BookCatalog.API/test-rate-limit.bat" afterDir="false" />
+    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="Set .NET SDK version to 8.0.303 in global.json&#10;&#10;Added a new global.json file to specify the .NET SDK version. This ensures consistent development and builds across environments.">
+      <change afterPath="$PROJECT_DIR$/BookCatalog.API/BooksHub.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookCatalog.API/BookCatalog.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/BookCatalog.API.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.API/BooksEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/BooksEndpoints.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookCatalog.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.API/Repositories/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Repositories/BookRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.API/Repositories/IBookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Repositories/IBookRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/BookCatalog.Frontend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/BookCatalog.Frontend.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Books/Books.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Books/Books.razor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,10 +57,17 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63059da4dc70403db49a4a2073b8bc023a0a0/a0/6681034b/NavigationManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6c8ca52d70f6435ebb144378daa6c59717878/f6/d83a188d/IWebAssemblyHostEnvironment.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c5a0a59f4fe94472b758b1fb5fa6028d13930/bf/036bc65d/IHost.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d7f3928d213f49c08a80ef3cc6f720993200/77/2487399c/LoggerEnrichmentConfigurationExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2d861df98593f86185428986f10ec394e76649fdf4e9e17934f13c4504dd645/RateLimiterServiceCollectionExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4dd5338dd6979df9518546eba3f77d8f859a1c5e160652f851ff244beae562/RateLimitPartition.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4e525246c8d29f6e83cbf39d87e36d08fffa09733e43382b9629ca6aa31541/RateLimiterOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/621526284d3e4868b98948aff942206525763e57e194a27623b66c384466/ServiceProviderServiceExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/66fb396b9859c8734ef8e8dd529955858164ba8a4e32d9085dd3099d5c9127b/List.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b37bdcda3df384671c8eed0dd528e74eff6e04eeb7b1e81f219e5e066318/ComponentBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f16564c8c4b61e6ea398fe412680c6b795b266584ccf6a362aed712dc4d2b387/WebApplication.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/blazor-book-catalog/BookCatalog.API/Repositories/BookRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BookCatalog.Frontend/Pages/Books/Books.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BookCatalog.Frontend/wwwroot/css/bootstrap/bootstrap.min.css.map" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -95,7 +108,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.BookCatalog.API: http">
+  <component name="RunManager" selected="Compound.API + Frontend">
     <configuration name="API + Frontend" type="CompoundRunConfigurationType">
       <toRun name="BookCatalog.API: http" type="LaunchSettings" />
       <toRun name="BookCatalog.Frontend: http" type="LaunchSettings" />
@@ -246,7 +259,7 @@
       <workItem from="1736447225251" duration="159000" />
       <workItem from="1736447433585" duration="25131000" />
       <workItem from="1736506839518" duration="96000" />
-      <workItem from="1736506947484" duration="610000" />
+      <workItem from="1736506947484" duration="8907000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial solution structure for BookCatalog project&#10;&#10;This commit sets up the foundational structure of the BookCatalog project. It includes the API and Frontend projects, solution file, configuration files, sample data, and static assets. These changes provide the groundwork for further development.">
       <option name="closed" value="true" />
@@ -360,7 +373,23 @@
       <option name="project" value="LOCAL" />
       <updated>1736505987505</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Add rate limiting to the API&#10;&#10;Introduced a fixed window rate limiter with a &quot;General&quot; policy allowing 10 requests per minute per client and queued overflow of up to 2 requests. Configured rate limiting middleware and a test endpoint to verify functionality. Added the `System.Threading.RateLimiting` package and a batch script for stress testing.">
+      <option name="closed" value="true" />
+      <created>1736507775447</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1736507775447</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Set .NET SDK version to 8.0.303 in global.json&#10;&#10;Added a new global.json file to specify the .NET SDK version. This ensures consistent development and builds across environments.">
+      <option name="closed" value="true" />
+      <created>1736507918418</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1736507918418</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,25 +412,8 @@
     <MESSAGE value="Improve book filter UI and add responsive styling.&#10;&#10;Refactored the filter UI in Books.razor to enhance structure, styling, and responsiveness by using CSS classes and flexbox layout. Introduced a new Books.razor.css file to manage related styles, including handling responsive behavior for filter inputs. Minor formatting updates in index.html to ensure consistent coding standards." />
     <MESSAGE value="Add sorting functionality to books listing&#10;&#10;Introduced sorting by title, author, and genre in both ascending and descending orders in the API and frontend. Updated the UI with sortable column headers and corresponding arrow indicators to reflect the sorting state. Adjusted the data fetching logic to include sorting parameters." />
     <MESSAGE value="Add bulk upload functionality for books via CSV&#10;&#10;Introduced a new API endpoint and frontend capability to upload books in bulk using a CSV file. Included CSV parsing logic via `CsvHelper`, server-side handling in `BooksEndpoints`, and an updated UI for file upload in the books page." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add bulk upload functionality for books via CSV&#10;&#10;Introduced a new API endpoint and frontend capability to upload books in bulk using a CSV file. Included CSV parsing logic via `CsvHelper`, server-side handling in `BooksEndpoints`, and an updated UI for file upload in the books page." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/BookCatalog.API/BooksEndpoints.cs</url>
-          <line>80</line>
-          <properties documentPath="C:\projects\blazor-book-catalog\BookCatalog.API\BooksEndpoints.cs" containingFunctionPresentation="Lambda expression inside Method 'MapBookEndpoints'">
-            <startOffsets>
-              <option value="2233" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2265" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Add rate limiting to the API&#10;&#10;Introduced a fixed window rate limiter with a &quot;General&quot; policy allowing 10 requests per minute per client and queued overflow of up to 2 requests. Configured rate limiting middleware and a test endpoint to verify functionality. Added the `System.Threading.RateLimiting` package and a batch script for stress testing." />
+    <MESSAGE value="Set .NET SDK version to 8.0.303 in global.json&#10;&#10;Added a new global.json file to specify the .NET SDK version. This ensures consistent development and builds across environments." />
+    <option name="LAST_COMMIT_MESSAGE" value="Set .NET SDK version to 8.0.303 in global.json&#10;&#10;Added a new global.json file to specify the .NET SDK version. This ensures consistent development and builds across environments." />
   </component>
 </project>

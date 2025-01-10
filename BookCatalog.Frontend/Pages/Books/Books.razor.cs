@@ -1,184 +1,256 @@
-﻿namespace BookCatalog.Frontend.Pages.Books;
-
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using BookCatalog.Frontend.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.JSInterop;
 
-public partial class Books
+namespace BookCatalog.Frontend.Pages.Books;
+
+public partial class Books : IAsyncDisposable
 {
-	private string? _author;
+    private string? _author;
+    private List<Book>? _books;
+    private int _currentPage = 1;
+    private string? _genre;
+    private readonly int _pageSize = 5;
+    private string? _sortBy = "title";
+    private string? _sortOrder = "asc";
+    private string? _title;
+    private int _totalCount;
+    private int _totalPages;
+    private IBrowserFile? _file;
+    private bool HasNext => _currentPage < _totalPages;
+    private bool HasPrev => _currentPage > 1;
 
-	private List<Book>? _books;
+    private HubConnection? _hubConnection;
 
-	private int _currentPage = 1;
-	private string? _genre;
-	private readonly int _pageSize = 5;
+    [Inject]
+    private HttpClient Http { get; set; } = null!;
 
-	private string? _sortBy = "title";
-	private string? _sortOrder = "asc";
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; } = null!;
 
-	private string? _title;
-	private int _totalCount;
-	private int _totalPages;
-	private IBrowserFile? _file;
-	private bool HasNext => _currentPage < _totalPages;
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = null!;
 
-	private bool HasPrev => _currentPage > 1;
+    [Inject]
+    private HubConnection HubConnection { get; set; } = null!;
 
-	[Inject]
-	private HttpClient Http { get; set; } = null!;
+    [Inject]
+    private ILogger<Books> Logger { get; set; } = null!;
 
-	[Inject]
-	private IJSRuntime JSRuntime { get; set; } = null!;
+    protected override async Task OnInitializedAsync()
+    {
+        Logger.LogInformation("Books component is initializing...");
+        try
+        {
+            await LoadBooks();
+            Logger.LogInformation("Books loaded successfully.");
 
-	[Inject]
-	private NavigationManager NavigationManager { get; set; } = null!;
+            await InitializeSignalR();
+            Logger.LogInformation("SignalR initialized successfully.");
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error initializing Books component");
+        }
+    }
 
-	protected override async Task OnInitializedAsync()
-	{
-		await LoadBooks();
-	}
+    private async Task InitializeSignalR()
+    {
+        // _hubConnection = new HubConnectionBuilder()
+        //     .WithUrl("http://localhost:5000/hubs/books")
+        //     .Build();
 
-	private async Task LoadBooks()
-	{
-		var query = $"?title={_title}&author={_author}&genre={_genre}" +
-		            $"&sortBy={_sortBy}&sortOrder={_sortOrder}" +
-		            $"&page={_currentPage}&pageSize={_pageSize}";
+        // Listen for real-time updates
+        HubConnection.On<Book>("BookAdded", book =>
+        {
+            _books?.Add(book);
+            StateHasChanged();
+        });
 
-		var result = await Http.GetFromJsonAsync<PagedResult<Book>>($"api/books{query}");
+        HubConnection.On<int>("BookDeleted", id =>
+        {
+            var book = _books?.FirstOrDefault(b => b.Id == id);
+            if (book != null)
+            {
+                _books.Remove(book);
+                StateHasChanged();
+            }
+        });
 
-		if (result is not null)
-		{
-			_books = result.Items;
-			_totalPages = (int)Math.Ceiling(result.TotalCount / (double)_pageSize);
-		}
-	}
+        HubConnection.On<Book>("BookUpdated", updatedBook =>
+        {
+            var existingBook = _books?.FirstOrDefault(b => b.Id == updatedBook.Id);
+            if (existingBook != null)
+            {
+                // Update the properties of the existing book
+                existingBook.Title = updatedBook.Title;
+                existingBook.Author = updatedBook.Author;
+                existingBook.Genre = updatedBook.Genre;
+                // Add any other properties you need to update
+            }
+            else
+            {
+                // If the book doesn't exist in the collection, optionally add it
+                _books?.Add(updatedBook);
+            }
+            StateHasChanged();
+        });
 
-	private async Task SearchBooks()
-	{
-		_currentPage = 1;
-		await LoadBooks();
-	}
+        // Start the connection
+        try
+        {
+            await HubConnection.StartAsync();
+            Console.WriteLine("SignalR connected.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error connecting to SignalR: {ex.Message}");
+        }
+    }
 
-	private async Task NextPage()
-	{
-		if (HasNext)
-		{
-			_currentPage++;
-			await LoadBooks();
-		}
-	}
+    private async Task LoadBooks()
+    {
+        var query = $"?title={_title}&author={_author}&genre={_genre}" +
+                    $"&sortBy={_sortBy}&sortOrder={_sortOrder}" +
+                    $"&page={_currentPage}&pageSize={_pageSize}";
 
-	private async Task PrevPage()
-	{
-		if (HasPrev)
-		{
-			_currentPage--;
-			await LoadBooks();
-		}
-	}
+        var result = await Http.GetFromJsonAsync<PagedResult<Book>>($"api/books{query}");
 
-	private void AddBook()
-	{
-		NavigationManager.NavigateTo("/books/edit-or-add");
-	}
+        if (result is not null)
+        {
+            _books = result.Items;
+            _totalPages = (int)Math.Ceiling(result.TotalCount / (double)_pageSize);
+        }
+    }
 
-	private void EditBook(int id)
-	{
-		NavigationManager.NavigateTo($"/books/edit-or-add/{id}");
-	}
+    private async Task SearchBooks()
+    {
+        _currentPage = 1;
+        await LoadBooks();
+    }
 
-	private async Task ApplySorting(string sortBy)
-	{
-		if (_sortBy == sortBy)
-		{
-			// Toggle sort order if the same column is clicked
-			_sortOrder = _sortOrder == "asc" ? "desc" : "asc";
-		}
-		else
-		{
-			// Set new sort column and reset to ascending
-			_sortBy = sortBy;
-			_sortOrder = "asc";
-		}
+    private async Task NextPage()
+    {
+        if (HasNext)
+        {
+            _currentPage++;
+            await LoadBooks();
+        }
+    }
 
-		// Reload books with new sorting
-		await LoadBooks();
-	}
+    private async Task PrevPage()
+    {
+        if (HasPrev)
+        {
+            _currentPage--;
+            await LoadBooks();
+        }
+    }
 
-	private string SortIndicator(string column)
-	{
-		if (_sortBy != column)
-		{
-			return string.Empty;
-		}
+    private void AddBook()
+    {
+        NavigationManager.NavigateTo("/books/edit-or-add");
+    }
 
-		return _sortOrder == "asc" ? "⬆️" : "⬇️"; // Arrow indicators
-	}
+    private void EditBook(int id)
+    {
+        NavigationManager.NavigateTo($"/books/edit-or-add/{id}");
+    }
 
-	private async Task DeleteBook(int id)
-	{
-		bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", new object[]
-		{
-			$"Are you sure you want to delete book ID {id}?"
-		});
+    private async Task ApplySorting(string sortBy)
+    {
+        if (_sortBy == sortBy)
+        {
+            _sortOrder = _sortOrder == "asc" ? "desc" : "asc";
+        }
+        else
+        {
+            _sortBy = sortBy;
+            _sortOrder = "asc";
+        }
 
-		if (!confirmed)
-		{
-			return;
-		}
+        await LoadBooks();
+    }
 
-		await Http.DeleteAsync($"api/books/{id}");
-		await LoadBooks();
-	}
-	
+    private string SortIndicator(string column)
+    {
+        if (_sortBy != column)
+        {
+            return string.Empty;
+        }
 
-	private async Task UploadCsv()
-	{
-		if (_file is null)
-		{
-			// No file selected, return early
-			return;
-		}
+        return _sortOrder == "asc" ? "⬆️" : "⬇️";
+    }
 
-		try
-		{
-			using var content = new MultipartFormDataContent();
-			var fileContent = new StreamContent(_file.OpenReadStream());
-			fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("text/csv");
-			content.Add(fileContent, "file", _file.Name);
+    private async Task DeleteBook(int id)
+    {
+        bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", new object[]
+        {
+            $"Are you sure you want to delete book ID {id}?"
+        });
 
-			var response = await Http.PostAsync("api/books/bulk-upload", content);
+        if (!confirmed)
+        {
+            return;
+        }
 
-			if (response.IsSuccessStatusCode)
-			{
-				// Reload books to reflect newly added data
-				await LoadBooks();
-				_file = null; // Reset the file input
-				StateHasChanged();
-			}
-			else
-			{
-				var errorMessage = await response.Content.ReadAsStringAsync();
-				Console.WriteLine($"Upload failed: {errorMessage}");
-			}
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine($"Error uploading file: {ex.Message}");
-		}
-	}
+        await Http.DeleteAsync($"api/books/{id}");
+        await LoadBooks();
+    }
 
-	private void HandleFileSelected(InputFileChangeEventArgs e)
-	{
-		if (e.FileCount <= 0)
-		{
-			return;
-		}
+    private async Task UploadCsv()
+    {
+        if (_file is null)
+        {
+            return;
+        }
 
-		_file = e.File;
-		Console.WriteLine($"Selected file: {_file.Name}");
-	}
+        try
+        {
+            using var content = new MultipartFormDataContent();
+            var fileContent = new StreamContent(_file.OpenReadStream());
+            fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("text/csv");
+            content.Add(fileContent, "file", _file.Name);
+
+            var response = await Http.PostAsync("api/books/bulk-upload", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadBooks();
+                _file = null;
+                StateHasChanged();
+            }
+            else
+            {
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Upload failed: {errorMessage}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error uploading file: {ex.Message}");
+        }
+    }
+
+    private void HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        if (e.FileCount <= 0)
+        {
+            return;
+        }
+
+        _file = e.File;
+        Console.WriteLine($"Selected file: {_file.Name}");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_hubConnection is not null)
+        {
+            await _hubConnection.DisposeAsync();
+        }
+    }
 }

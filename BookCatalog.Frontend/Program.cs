@@ -1,8 +1,10 @@
+using BookCatalog.Frontend;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using BookCatalog.Frontend;
+using Microsoft.AspNetCore.SignalR.Client;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
@@ -13,5 +15,12 @@ builder.Services.AddScoped(sp => new HttpClient
 	BaseAddress = new Uri(apiBaseAddress)
 });
 
+builder.Services.AddScoped(sp => new HubConnectionBuilder()
+	.WithUrl($"{apiBaseAddress}/hubs/books")
+	.WithAutomaticReconnect()
+	.Build());
+
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
 await builder.Build().RunAsync();

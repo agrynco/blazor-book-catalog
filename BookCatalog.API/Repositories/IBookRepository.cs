@@ -11,5 +11,12 @@ public interface IBookRepository
 	bool Delete(int id);
 	int BulkAddFromCsv(Stream csvStream);
 
-	IEnumerable<Book> Search(string? title, string? author, string? genre);
+	(IEnumerable<Book> Items, int TotalCount) Search(
+		string? title,
+		string? author,
+		string? genre,
+		string? sortBy = "title",
+		string? sortOrder = "asc",
+		int page = 1,
+		int pageSize = 10);
 }
