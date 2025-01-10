@@ -1,4 +1,0 @@
-services:
-  blazor:
-    environment:
-      - API_BASE_ADDRESS=http://api:5000
