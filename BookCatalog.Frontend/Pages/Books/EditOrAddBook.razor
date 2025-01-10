@@ -1,0 +1,26 @@
+﻿@page "/books/edit-or-add/{id:int?}"
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+
+<h3>@(_addOrEditBook.Id == 0 ? "Add Book" : "Edit Book")</h3>
+
+<EditForm Model="@_addOrEditBook" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label for="title">Title:</label>
+        <InputText id="title" @bind-Value="_addOrEditBook.Title" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label for="author">Author:</label>
+        <InputText id="author" @bind-Value="_addOrEditBook.Author" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label for="genre">Genre:</label>
+        <InputText id="genre" @bind-Value="_addOrEditBook.Genre" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">@SubmitButtonText</button>
+    <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+</EditForm>

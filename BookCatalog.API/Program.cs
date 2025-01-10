@@ -8,7 +8,19 @@ builder.Services.AddCustomSwagger();
 
 builder.Services.AddSingleton<IBookRepository, BookRepository>();
 
+builder.Services.AddCors(options =>
+{
+	options.AddDefaultPolicy(policy =>
+	{
+		policy.AllowAnyOrigin()
+			.AllowAnyHeader()
+			.AllowAnyMethod();
+	});
+});
+
 WebApplication app = builder.Build();
+
+app.UseCors();
 
 app.UseCustomSwagger();
 

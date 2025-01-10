@@ -15,9 +15,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="Add whitespace for readability in Program.cs&#10;&#10;A blank line was inserted to improve code readability and organization. This change has no functional impact but enhances the structure of the Program.cs file.">
+    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="Add seed data to BookRepository for initial book collection&#10;&#10;This commit updates the `BookRepository` with a predefined list of seed data containing popular programming and software development books. This change enables the application to have an initial set of data for development and testing purposes without requiring external data setup.">
+      <change afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Models/AddOrEditBook.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Models/Book.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Models/PagedResult.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Books/Books.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Books/Books.razor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Books/EditOrAddBook.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Books/EditOrAddBook.razor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.API/Repositories/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Repositories/BookRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/BookCatalog.Frontend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/BookCatalog.Frontend.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Layout/NavMenu.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +47,8 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63059da4dc70403db49a4a2073b8bc023a0a0/a0/6681034b/NavigationManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6c8ca52d70f6435ebb144378daa6c59717878/f6/d83a188d/IWebAssemblyHostEnvironment.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c5a0a59f4fe94472b758b1fb5fa6028d13930/bf/036bc65d/IHost.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f16564c8c4b61e6ea398fe412680c6b795b266584ccf6a362aed712dc4d2b387/WebApplication.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BookCatalog.Frontend/wwwroot/css/bootstrap/bootstrap.min.css.map" root0="FORCE_HIGHLIGHTING" />
@@ -55,6 +67,7 @@
   "keyToString": {
     ".NET Launch Settings Profile.BookCatalog.API: http.executor": "Debug",
     ".NET Launch Settings Profile.BookCatalog.Frontend: http.executor": "Debug",
+    "Compound.API + Frontend.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
@@ -68,7 +81,19 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="LaunchSettings" />
+      </set>
+    </option>
+  </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.BookCatalog.API: http">
+    <configuration name="API + Frontend" type="CompoundRunConfigurationType">
+      <toRun name="BookCatalog.API: http" type="LaunchSettings" />
+      <toRun name="BookCatalog.Frontend: http" type="LaunchSettings" />
+      <method v="2" />
+    </configuration>
     <configuration name="BookCatalog.API: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/BookCatalog.API/BookCatalog.API.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
@@ -86,7 +111,7 @@
     </configuration>
     <configuration name="BookCatalog.API: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/BookCatalog.API/BookCatalog.API.csproj" />
-      <option name="LAUNCH_PROFILE_TFM" value="net9.0" />
+      <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
       <option name="LAUNCH_PROFILE_NAME" value="http" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -131,7 +156,7 @@
     </configuration>
     <configuration name="BookCatalog.Frontend: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/BookCatalog.Frontend/BookCatalog.Frontend.csproj" />
-      <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
       <option name="LAUNCH_PROFILE_NAME" value="http" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -160,6 +185,15 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.BookCatalog.API: http" />
+      <item itemvalue=".NET Launch Settings Profile.BookCatalog.API: https" />
+      <item itemvalue=".NET Launch Settings Profile.BookCatalog.API: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.BookCatalog.Frontend: http" />
+      <item itemvalue=".NET Launch Settings Profile.BookCatalog.Frontend: https" />
+      <item itemvalue=".NET Launch Settings Profile.BookCatalog.Frontend: IIS Express" />
+      <item itemvalue="Compound.API + Frontend" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -172,7 +206,7 @@
       <workItem from="1736446402374" duration="9000" />
       <workItem from="1736446422175" duration="785000" />
       <workItem from="1736447225251" duration="159000" />
-      <workItem from="1736447433585" duration="5954000" />
+      <workItem from="1736447433585" duration="13352000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial solution structure for BookCatalog project&#10;&#10;This commit sets up the foundational structure of the BookCatalog project. It includes the API and Frontend projects, solution file, configuration files, sample data, and static assets. These changes provide the groundwork for further development.">
       <option name="closed" value="true" />
@@ -214,7 +248,23 @@
       <option name="project" value="LOCAL" />
       <updated>1736453098346</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add seed data to BookRepository for initial book collection&#10;&#10;This commit updates the `BookRepository` with a predefined list of seed data containing popular programming and software development books. This change enables the application to have an initial set of data for development and testing purposes without requiring external data setup.">
+      <option name="closed" value="true" />
+      <created>1736453770688</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1736453770688</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add seed data to BookRepository for initial book collection&#10;&#10;This commit updates the `BookRepository` with a predefined list of seed data containing popular programming and software development books. This change enables the application to have an initial set of data for development and testing purposes without requiring external data setup.">
+      <option name="closed" value="true" />
+      <created>1736453797430</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1736453797430</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +279,7 @@
     <MESSAGE value="Clean up generated and cache files from the project.&#10;&#10;Deleted unnecessary auto-generated files and build artifacts under the `obj` directory. This reduces clutter and ensures a cleaner repository state. Bootstrap library files were also removed from `wwwroot/lib` as part of this cleanup." />
     <MESSAGE value="Add CRUD endpoints and Swagger support to API&#10;&#10;This commit introduces CRUD endpoints for managing books in the API, leveraging a `BookRepository` for data operations. Additionally, Swagger support is added for API documentation and testing, including custom extension methods to configure Swagger. These changes enhance the API's functionality and developer usability." />
     <MESSAGE value="Add whitespace for readability in Program.cs&#10;&#10;A blank line was inserted to improve code readability and organization. This change has no functional impact but enhances the structure of the Program.cs file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add whitespace for readability in Program.cs&#10;&#10;A blank line was inserted to improve code readability and organization. This change has no functional impact but enhances the structure of the Program.cs file." />
+    <MESSAGE value="Add seed data to BookRepository for initial book collection&#10;&#10;This commit updates the `BookRepository` with a predefined list of seed data containing popular programming and software development books. This change enables the application to have an initial set of data for development and testing purposes without requiring external data setup." />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
