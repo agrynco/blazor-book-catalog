@@ -10,12 +10,12 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 string apiBaseAddress = Environment.GetEnvironmentVariable("API_BASE_ADDRESS") ?? "http://localhost:5000";
 
-builder.Services.AddScoped(sp => new HttpClient
+builder.Services.AddScoped(_ => new HttpClient
 {
 	BaseAddress = new Uri(apiBaseAddress)
 });
 
-builder.Services.AddScoped(sp => new HubConnectionBuilder()
+builder.Services.AddScoped(_ => new HubConnectionBuilder()
 	.WithUrl($"{apiBaseAddress}/hubs/books")
 	.WithAutomaticReconnect()
 	.Build());

@@ -7,7 +7,7 @@ using Microsoft.JSInterop;
 
 namespace BookCatalog.Frontend.Pages.Books;
 
-public partial class Books : IAsyncDisposable
+public partial class Books
 {
     private string? _author;
     private List<Book>? _books;
@@ -17,19 +17,16 @@ public partial class Books : IAsyncDisposable
     private string? _sortBy = "title";
     private string? _sortOrder = "asc";
     private string? _title;
-    private int _totalCount;
     private int _totalPages;
     private IBrowserFile? _file;
     private bool HasNext => _currentPage < _totalPages;
     private bool HasPrev => _currentPage > 1;
 
-    private HubConnection? _hubConnection;
-
     [Inject]
     private HttpClient Http { get; set; } = null!;
 
     [Inject]
-    private IJSRuntime JSRuntime { get; set; } = null!;
+    private IJSRuntime JsRuntime { get; set; } = null!;
 
     [Inject]
     private NavigationManager NavigationManager { get; set; } = null!;
@@ -59,11 +56,6 @@ public partial class Books : IAsyncDisposable
 
     private async Task InitializeSignalR()
     {
-        // _hubConnection = new HubConnectionBuilder()
-        //     .WithUrl("http://localhost:5000/hubs/books")
-        //     .Build();
-
-        // Listen for real-time updates
         HubConnection.On<Book>("BookAdded", book =>
         {
             _books?.Add(book);
@@ -72,17 +64,20 @@ public partial class Books : IAsyncDisposable
 
         HubConnection.On<int>("BookDeleted", id =>
         {
-            var book = _books?.FirstOrDefault(b => b.Id == id);
-            if (book != null)
+            Book? book = _books?.SingleOrDefault(b => b.Id == id);
+
+            if (book == null)
             {
-                _books.Remove(book);
-                StateHasChanged();
+                return;
             }
+
+            _books!.Remove(book);
+            StateHasChanged();
         });
 
         HubConnection.On<Book>("BookUpdated", updatedBook =>
         {
-            var existingBook = _books?.FirstOrDefault(b => b.Id == updatedBook.Id);
+            var existingBook = _books?.SingleOrDefault(b => b.Id == updatedBook.Id);
             if (existingBook != null)
             {
                 // Update the properties of the existing book
@@ -187,7 +182,7 @@ public partial class Books : IAsyncDisposable
 
     private async Task DeleteBook(int id)
     {
-        bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", new object[]
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", new object[]
         {
             $"Are you sure you want to delete book ID {id}?"
         });
@@ -244,13 +239,5 @@ public partial class Books : IAsyncDisposable
 
         _file = e.File;
         Console.WriteLine($"Selected file: {_file.Name}");
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (_hubConnection is not null)
-        {
-            await _hubConnection.DisposeAsync();
-        }
     }
 }
