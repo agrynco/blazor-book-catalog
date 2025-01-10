@@ -17,10 +17,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="Add console logging and improve Swagger setup&#10;&#10;Console logging was added alongside Seq for better log visibility during development. The Swagger middleware now runs in all environments, not just development, ensuring API documentation is always accessible. Additionally, the README was updated with detailed instructions for running the application.">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/global.json" beforeDir="false" />
+    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="Remove global.json and update README instructions&#10;&#10;The global.json file specifying the .NET SDK version was removed to avoid version constraints. README instructions were clarified for running the application, with updated frontend URLs and better formatting. Other minor tweaks ensure consistent project setup and usability improvements.">
+      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/BookCatalog.Frontend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/BookCatalog.Frontend.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +250,7 @@
       <workItem from="1736447225251" duration="159000" />
       <workItem from="1736447433585" duration="25131000" />
       <workItem from="1736506839518" duration="96000" />
-      <workItem from="1736506947484" duration="13835000" />
+      <workItem from="1736506947484" duration="14420000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial solution structure for BookCatalog project&#10;&#10;This commit sets up the foundational structure of the BookCatalog project. It includes the API and Frontend projects, solution file, configuration files, sample data, and static assets. These changes provide the groundwork for further development.">
       <option name="closed" value="true" />
@@ -398,7 +396,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736523864106</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Remove global.json and update README instructions&#10;&#10;The global.json file specifying the .NET SDK version was removed to avoid version constraints. README instructions were clarified for running the application, with updated frontend URLs and better formatting. Other minor tweaks ensure consistent project setup and usability improvements.">
+      <option name="closed" value="true" />
+      <created>1736525552262</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1736525552262</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,6 +431,7 @@
     <MESSAGE value="Set .NET SDK version to 8.0.303 in global.json&#10;&#10;Added a new global.json file to specify the .NET SDK version. This ensures consistent development and builds across environments." />
     <MESSAGE value="Integrate SignalR for real-time book updates&#10;&#10;Added SignalR support for real-time updates in both backend and frontend. Backend changes include a new `BooksHub` for notifications and updates to `BooksEndpoints`. Frontend now listens to real-time events like `BookAdded`, `BookUpdated`, and `BookDeleted` for dynamic UI refreshes. Additionally, logging and Serilog were configured for enhanced monitoring." />
     <MESSAGE value="Add console logging and improve Swagger setup&#10;&#10;Console logging was added alongside Seq for better log visibility during development. The Swagger middleware now runs in all environments, not just development, ensuring API documentation is always accessible. Additionally, the README was updated with detailed instructions for running the application." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add console logging and improve Swagger setup&#10;&#10;Console logging was added alongside Seq for better log visibility during development. The Swagger middleware now runs in all environments, not just development, ensuring API documentation is always accessible. Additionally, the README was updated with detailed instructions for running the application." />
+    <MESSAGE value="Remove global.json and update README instructions&#10;&#10;The global.json file specifying the .NET SDK version was removed to avoid version constraints. README instructions were clarified for running the application, with updated frontend URLs and better formatting. Other minor tweaks ensure consistent project setup and usability improvements." />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove global.json and update README instructions&#10;&#10;The global.json file specifying the .NET SDK version was removed to avoid version constraints. README instructions were clarified for running the application, with updated frontend URLs and better formatting. Other minor tweaks ensure consistent project setup and usability improvements." />
   </component>
 </project>
