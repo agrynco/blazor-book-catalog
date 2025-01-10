@@ -17,12 +17,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="Add book management features and enable CORS in API&#10;&#10;This commit introduces full CRUD functionality for managing books, including pages for listing, adding, editing, and deleting books in the frontend. It also enables CORS in the API to support client-server communication and adjusts the frontend to target .NET 7. Additionally, navigation and models were updated to support proper data handling and UI improvements.">
+    <list default="true" id="1f264b09-a10a-4409-964e-b49258fcacf0" name="Changes" comment="Remove sample Razor pages and add Docker support for deployment&#10;&#10;This commit deletes unused Razor pages (Counter, Home, and Weather) to streamline the frontend structure. Additionally, it introduces `docker-compose` and Dockerfiles for the API and frontend projects, enabling containerized deployment. Environment variable support for API base address is configured, with nginx set up for serving the frontend.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookCatalog/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Counter.razor" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Home.razor" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Pages/Weather.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.API/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.API/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Layout/NavMenu.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookCatalog.Frontend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookCatalog.Frontend/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +230,7 @@
       <workItem from="1736446402374" duration="9000" />
       <workItem from="1736446422175" duration="785000" />
       <workItem from="1736447225251" duration="159000" />
-      <workItem from="1736447433585" duration="16075000" />
+      <workItem from="1736447433585" duration="17557000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial solution structure for BookCatalog project&#10;&#10;This commit sets up the foundational structure of the BookCatalog project. It includes the API and Frontend projects, solution file, configuration files, sample data, and static assets. These changes provide the groundwork for further development.">
       <option name="closed" value="true" />
@@ -296,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736493544963</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Remove sample Razor pages and add Docker support for deployment&#10;&#10;This commit deletes unused Razor pages (Counter, Home, and Weather) to streamline the frontend structure. Additionally, it introduces `docker-compose` and Dockerfiles for the API and frontend projects, enabling containerized deployment. Environment variable support for API base address is configured, with nginx set up for serving the frontend.">
+      <option name="closed" value="true" />
+      <created>1736496739413</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1736496739413</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,6 +321,7 @@
     <MESSAGE value="Add whitespace for readability in Program.cs&#10;&#10;A blank line was inserted to improve code readability and organization. This change has no functional impact but enhances the structure of the Program.cs file." />
     <MESSAGE value="Add seed data to BookRepository for initial book collection&#10;&#10;This commit updates the `BookRepository` with a predefined list of seed data containing popular programming and software development books. This change enables the application to have an initial set of data for development and testing purposes without requiring external data setup." />
     <MESSAGE value="Add book management features and enable CORS in API&#10;&#10;This commit introduces full CRUD functionality for managing books, including pages for listing, adding, editing, and deleting books in the frontend. It also enables CORS in the API to support client-server communication and adjusts the frontend to target .NET 7. Additionally, navigation and models were updated to support proper data handling and UI improvements." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add book management features and enable CORS in API&#10;&#10;This commit introduces full CRUD functionality for managing books, including pages for listing, adding, editing, and deleting books in the frontend. It also enables CORS in the API to support client-server communication and adjusts the frontend to target .NET 7. Additionally, navigation and models were updated to support proper data handling and UI improvements." />
+    <MESSAGE value="Remove sample Razor pages and add Docker support for deployment&#10;&#10;This commit deletes unused Razor pages (Counter, Home, and Weather) to streamline the frontend structure. Additionally, it introduces `docker-compose` and Dockerfiles for the API and frontend projects, enabling containerized deployment. Environment variable support for API base address is configured, with nginx set up for serving the frontend." />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove sample Razor pages and add Docker support for deployment&#10;&#10;This commit deletes unused Razor pages (Counter, Home, and Weather) to streamline the frontend structure. Additionally, it introduces `docker-compose` and Dockerfiles for the API and frontend projects, enabling containerized deployment. Environment variable support for API base address is configured, with nginx set up for serving the frontend." />
   </component>
 </project>
