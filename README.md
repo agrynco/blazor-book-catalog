@@ -27,7 +27,7 @@ You can run the application locally using **scripts** or by following **manual s
 1. Open a terminal and navigate to the root of the repository.
 2. Use one of the following scripts:
 
-   - **Run with Docker Compose:**
+  - **Run with Docker Compose:**
 
      ```cmd
      run-docker.bat
@@ -37,15 +37,17 @@ You can run the application locally using **scripts** or by following **manual s
 
      - API: [http://localhost:5000/swagger](http://localhost:5000/swagger)
      - Frontend: [http://localhost:8080](http://localhost:8080/)
-3. - **Run without Docker:**
+ 
+  - **Run without Docker:**
 
      ```cmd
      run-bookcatalog.bat
      ```
-4. The application will start:
 
-   - API: [http://localhost:5000/swagger](http://localhost:5000/swagger)
-   - Frontend: [http://localhost:8080](http://localhost:8080)
+     The application will start:
+
+   	- API: [http://localhost:5000/swagger](http://localhost:5000/swagger)
+   	- Frontend: [http://localhost:5163](http://localhost:5163)
 
 #### **Linux/Mac**
 
@@ -56,14 +58,20 @@ You can run the application locally using **scripts** or by following **manual s
      ```bash
      ./run-docker.sh
      ```
+     The application will start:
+
+     - API: [http://localhost:5000/swagger](http://localhost:5000/swagger)
+     - Frontend: [http://localhost:8080](http://localhost:8080/)
+
+
    - **Run without Docker:**
      ```bash
      ./run-bookcatalog.sh
      ```
-3. The application will start:
+     The application will start:
 
-   - API: [http://localhost:5000](http://localhost:5000)
-   - Frontend: [http://localhost:5001](http://localhost:5163)
+   	 - API: [http://localhost:5000/swagger](http://localhost:5000/swagger)
+   	 - Frontend: [http://localhost:5163](http://localhost:5163)
 
 ---
 
