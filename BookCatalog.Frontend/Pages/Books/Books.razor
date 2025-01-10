@@ -2,19 +2,24 @@
 
 <h3>Books</h3>
 
-<!-- Search / Filter -->
-<div class="mb-3">
-    <label>Title:</label>
-    <input @bind="_title" />
-
-    <label>Author:</label>
-    <input @bind="_author" />
-
-    <label>Genre:</label>
-    <input @bind="_genre" />
-
-    <button @onclick="SearchBooks">Search</button>
+<div class="filter-container mb-3">
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input id="title" @bind="_title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="author">Author:</label>
+        <input id="author" @bind="_author" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="genre">Genre:</label>
+        <input id="genre" @bind="_genre" class="form-control" />
+    </div>
+    <div class="form-group d-flex align-items-end">
+        <button class="btn btn-primary w-100" @onclick="SearchBooks">Search</button>
+    </div>
 </div>
+
 
 
 <button class="btn btn-success mb-3" @onclick="AddBook">Add Book</button>
