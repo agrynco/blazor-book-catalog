@@ -1,21 +1,25 @@
-# Use the official .NET SDK image to build the app
+# Use .NET 8 SDK for building the application
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy and restore dependencies
-COPY *.csproj ./
+# Copy project files
+COPY . ./
+
+# Restore dependencies
 RUN dotnet restore
 
-# Copy the entire project and build the app
-COPY . ./
+# Build the Blazor application
 RUN dotnet publish -c Release -o /publish
 
-# Use a lightweight web server (nginx) to serve the app
-FROM nginx:alpine
+# Use Nginx to serve the Blazor app
+FROM nginx:alpine AS final
 WORKDIR /usr/share/nginx/html
+
+# Copy the published Blazor files
 COPY --from=build /publish/wwwroot .
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80
 EXPOSE 80
 
-# Expose the default nginx port
-EXPOSE 80
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
