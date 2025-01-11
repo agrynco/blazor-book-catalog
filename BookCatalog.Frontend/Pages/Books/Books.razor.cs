@@ -108,16 +108,24 @@ public partial class Books
 
     private async Task LoadBooks()
     {
-        var query = $"?title={_title}&author={_author}&genre={_genre}" +
-                    $"&sortBy={_sortBy}&sortOrder={_sortOrder}" +
-                    $"&page={_currentPage}&pageSize={_pageSize}";
 
-        var result = await Http.GetFromJsonAsync<PagedResult<Book>>($"api/books{query}");
-
-        if (result is not null)
+        try
         {
-            _books = result.Items;
-            _totalPages = (int)Math.Ceiling(result.TotalCount / (double)_pageSize);
+            var query = $"?title={_title}&author={_author}&genre={_genre}" +
+                        $"&sortBy={_sortBy}&sortOrder={_sortOrder}" +
+                        $"&page={_currentPage}&pageSize={_pageSize}";
+
+            var result = await Http.GetFromJsonAsync<PagedResult<Book>>($"api/books{query}");
+
+            if (result is not null)
+            {
+                _books = result.Items;
+                _totalPages = (int)Math.Ceiling(result.TotalCount / (double)_pageSize);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading books: {ex.Message}");
         }
     }
 

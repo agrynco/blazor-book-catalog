@@ -8,6 +8,8 @@ if not exist "docker-compose.yml" (
     exit /b 1
 )
 
+docker-compose down --remove-orphans
+
 echo Starting the application using Docker Compose...
 
 docker-compose build
