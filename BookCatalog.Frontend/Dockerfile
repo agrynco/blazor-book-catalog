@@ -1,12 +1,17 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
 WORKDIR /app
 
-COPY . ./
-RUN dotnet restore
-RUN dotnet publish -c Release -o /publish
+COPY BookCatalog.sln ./
+COPY ./BookCatalog.API/BookCatalog.API.csproj ./BookCatalog.API/
+COPY ./BookCatalog.Frontend/BookCatalog.Frontend.csproj ./BookCatalog.Frontend/
 
-FROM nginx:latest AS final
+RUN dotnet restore
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+FROM nginx:latest
 WORKDIR /app
 EXPOSE 8080
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./BookCatalog.Frontend/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/out/wwwroot /usr/share/nginx/html

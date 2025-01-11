@@ -2,10 +2,10 @@ version: "3.9"
 services:
   api:
     build:
-      context: ./BookCatalog.API
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: BookCatalog.API/Dockerfile
     ports:
-      - "5000:5000" # Expose container's port 5000 on host's port 5000
+      - "5000:5000"
     environment:
       - ASPNETCORE_URLS=http://+:5000
     networks:
@@ -13,15 +13,14 @@ services:
 
   blazor:
     build:
-      context: ./BookCatalog.Frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: BookCatalog.Frontend/Dockerfile
     ports:
       - "8080:8080"
     networks:
       - app-network
     environment:
       - API_BASE_ADDRESS=http://localhost:5000
-
 
 networks:
   app-network:
