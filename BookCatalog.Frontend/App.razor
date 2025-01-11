@@ -6,7 +6,18 @@
     <NotFound>
         <PageTitle>Not found</PageTitle>
         <LayoutView Layout="@typeof(MainLayout)">
-            <p role="alert">Sorry, there's nothing at this address.</p>
+            <p role="alert">Shit happens</p>
         </LayoutView>
     </NotFound>
 </Router>
+
+
+@code {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.NavigateTo("/books");
+    }
+}
