@@ -5,14 +5,13 @@
     align-items: flex-end !important;
 }
 
-
 .filter-container .form-group {
-    flex: 1 1 auto; /* Allow flexible resizing */
-    min-width: 200px; /* Set a minimum width for each input */
+    flex: 1 1 auto;
+    min-width: 200px;
 }
 
 @media (min-width: 768px) {
     .filter-container {
-        flex-wrap: nowrap; /* Force a single row if there’s enough space */
+        flex-wrap: nowrap;
     }
 }
